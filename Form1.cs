@@ -10,11 +10,17 @@ using System.Windows.Forms;
 
 namespace Chess_Project
 {
-    public partial class Form1 : Form
+    public partial class frmMain : Form
     {
-        public Form1()
+        #region Properties
+        ChessBoardManager chessBoard;
+        #endregion
+        public frmMain()
         {
             InitializeComponent();
+
+            chessBoard = new ChessBoardManager(pnlBoard);
+            chessBoard.DrawChessBoard();
         }
     }
 }
