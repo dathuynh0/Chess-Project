@@ -34,6 +34,40 @@ namespace Chess_Project.Model
                 { 0, 1 } // đi qua phải
             };
 
+            for(int i = 0; i < directions.GetLength(0); i++)
+            {
+                int x = Position.X;
+                int y = Position.Y;
+
+                while(true)
+                {
+                    x = x + directions[i, 0];
+                    y = y + directions[i, 1];
+
+                    // ngoài bàn cờ
+                    if (!board.IsInsideBoard(x, y)) break;
+
+                    Piece targetPiece = board.GetPiece(x, y);
+
+                    // ô trống
+                    if(targetPiece == null)
+                    {
+                        moves.Add(new Position(x, y));
+                    }
+                    else
+                    {
+                        // quân đối phương
+                        if(targetPiece.Color == Color)
+                        {
+                            moves.Add(new Position(x, y));
+                        }
+
+                        // gặp quân thì dừng
+                        break;
+                    }    
+                }
+            }
+
             return moves;
         }
     }

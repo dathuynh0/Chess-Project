@@ -14,6 +14,7 @@ namespace Chess_Project
     {
         #region Properties
         ChessBoardManager chessBoard;
+        private Board board;
         #endregion
         public frmMain()
         {
@@ -21,6 +22,11 @@ namespace Chess_Project
 
             chessBoard = new ChessBoardManager(pnlBoard);
             chessBoard.DrawChessBoard();
+
+            board = new Board();
+
+            board.SetupPieces();
+            chessBoard.DrawPieces(board);
         }
     }
 }

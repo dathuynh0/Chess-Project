@@ -65,6 +65,7 @@ namespace Chess_Project.Model
                             moves.Add(new Position(x, y));
                         }
 
+                        // gặp quân thì dừng
                         break;
                     }
                 }
