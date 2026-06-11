@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace Chess_Project.Model
     {
         public ColorPiece Color { get; set; } // quân trắng 0 hoặc đen 1    
         public Position Position { get; set; }
-        public string ImagePath { get; protected set; }
+        public Image PieceImage { get; protected set; }
         public string Name { get; set; }
         public bool HasMoved { get; set; }
 

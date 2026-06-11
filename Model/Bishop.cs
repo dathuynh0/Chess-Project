@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,11 +15,11 @@ namespace Chess_Project.Model
 
             if (color == ColorPiece.Black)
             {
-                ImagePath = "D:\\HocC#\\Chess_Project\\Resources\\Black_B_5.png";
+                PieceImage = Image.FromFile("D:\\HocC#\\Chess_Project\\Resources\\Black_B_5.png");
             }
             else
             {
-                ImagePath = "D:\\HocC#\\Chess_Project\\Resources\\White_B_5.png";
+                PieceImage = Image.FromFile("D:\\HocC#\\Chess_Project\\Resources\\White_B_5.png");
             } 
                 
         }
@@ -46,7 +47,7 @@ namespace Chess_Project.Model
                     x = x + directions[i, 0];
                     y = y + directions[i, 1];
 
-                    if(board.IsInsideBoard(x, y))
+                    if(!board.IsInsideBoard(x, y))
                     {
                         break;
                     }

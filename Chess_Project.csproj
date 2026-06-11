@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AI\ChessAi.cs" />
     <Compile Include="Board.cs" />
     <Compile Include="ChessBoardManager.cs" />
     <Compile Include="Cons.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Model\ColorPiece.cs" />
     <Compile Include="Model\King.cs" />
     <Compile Include="Model\Knight.cs" />
+    <Compile Include="Model\Move.cs" />
     <Compile Include="Model\Pawn.cs" />
     <Compile Include="Model\Piece.cs" />
     <Compile Include="Model\Position.cs" />
@@ -83,7 +85,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="AI\" />
     <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,11 +15,11 @@ namespace Chess_Project.Model
 
             if (color == ColorPiece.Black) 
             {
-                ImagePath = "D:\\HocC#\\Chess_Project\\Resources\\Black_P_5.png";
+                PieceImage = Image.FromFile("D:\\HocC#\\Chess_Project\\Resources\\Black_P_5.png");
             }
             else
             {
-                ImagePath = "D:\\HocC#\\Chess_Project\\Resources\\White_P_5.png";
+                PieceImage = Image.FromFile("D:\\HocC#\\Chess_Project\\Resources\\White_P_5.png");
             }
         }
 
@@ -27,7 +28,7 @@ namespace Chess_Project.Model
             List<Position> moves = new List<Position>();
 
             // hướng duy chuyển
-            int direction = Color == ColorPiece.White ? 1 : -1;
+            int direction = Color == ColorPiece.White ? -1 : 1;
 
             // đi 1 ô
             Position oneStep = new Position(Position.X + direction, Position.Y);
@@ -52,7 +53,7 @@ namespace Chess_Project.Model
 
             // ăn chéo phải
             Position rightCapture = new Position(Position.X + direction, Position.Y + 1);
-            if(board.IsInsideBoard(rightCapture.X, rightCapture.Y) && board.HasAllyPiece(rightCapture, Color))
+            if (board.IsInsideBoard(rightCapture.X, rightCapture.Y) &&  board.HasEnemyPiece(rightCapture, Color))
             {
                 moves.Add(rightCapture);
             }
@@ -60,7 +61,7 @@ namespace Chess_Project.Model
             return moves;
         }
 
-        public Piece Promote()
+        public Piece Promote() // phong hậu
         {
             return new Queen(Color, Position);
         }

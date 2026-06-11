@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,11 +15,11 @@ namespace Chess_Project.Model
 
             if (color == ColorPiece.Black)
             {
-                ImagePath = "D:\\HocC#\\Chess_Project\\Resources\\Black_K_5.png";
+                PieceImage = Image.FromFile("D:\\HocC#\\Chess_Project\\Resources\\Black_K_5.png");
             }
             else
             {
-                ImagePath = "D:\\HocC#\\Chess_Project\\Resources\\White_K_5.png";
+                PieceImage = Image.FromFile("D:\\HocC#\\Chess_Project\\Resources\\White_K_5.png");
             }    
         }
 

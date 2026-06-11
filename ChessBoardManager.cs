@@ -1,4 +1,5 @@
-﻿using Chess_Project.Model;
+﻿using Chess_Project.AI;
+using Chess_Project.Model;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -13,8 +14,16 @@ namespace Chess_Project
     public class ChessBoardManager
     {
         #region Properties
-
         private Panel chessBoard;
+        private Label lblTurn;
+        private Board board;
+        private Piece selectedPiece;
+        private List<Position> validMoves;
+        private ColorPiece currentTurn; // lượt của ai
+        public event Action TurnChanged;
+
+        // tạo AI
+        private ChessAI ai;
 
         public Panel ChessBoard
         {
@@ -28,10 +37,17 @@ namespace Chess_Project
 
         #region Initialize
 
-        public ChessBoardManager(Panel chessBoard)
+        public ChessBoardManager(Panel chessBoard, Board board, Label lblTurn)
         {
             this.chessBoard = chessBoard;
+            this.board = board;
+            this.lblTurn = lblTurn;
+
             Matrix = new Button[8, 8];
+            currentTurn = ColorPiece.White;
+
+            // khởi tạo ai
+            ai = new ChessAI(board);
         }
 
         #endregion
@@ -79,10 +95,144 @@ namespace Chess_Project
         {
             Button btn = sender as Button;
 
-            Position pos = (Position)btn.Tag;
+            Position position = (Position)btn.Tag;
 
-            MessageBox.Show(
-                $"Row: {pos.X}\nCol: {pos.Y}");
+            HandleClick(position);
+        }
+
+        private void HandleClick(Position position)
+        {
+            Piece piece = board.GetPiece(position.X, position.Y);
+
+            // chưa chọn quân
+            if(selectedPiece == null)
+            {
+                if (piece == null) return;
+                if(piece == null && piece.Color == currentTurn)
+                {
+                    return;
+                }
+
+                if(piece.Color != currentTurn)
+                {
+                    return;
+                }
+                selectedPiece = piece;
+                validMoves = piece.GetValidMoves(board);
+
+                HighlightMoves(validMoves);
+
+                return;
+            }
+
+            MoveSelectedPiece(position);
+        }
+
+        private void HighlightMoves(List<Position> moves)
+        {
+            foreach (Position move in moves)
+            {
+                Matrix[move.X, move.Y].BackColor = Color.DarkBlue;
+            }
+        }
+
+        private void ClearHighlight()
+        {
+            for(int x = 0; x < 8; x++)
+            {
+                for(int y = 0; y < 8; y++)
+                {
+                    if ((x + y) % 2 == 0)
+                    {
+                        Matrix[x, y].BackColor
+                            = Color.White;
+                    }
+                    else
+                    {
+                        Matrix[x, y].BackColor
+                            = Color.DarkGreen;
+                    }
+                } 
+                    
+            }
+        }
+
+        private bool IsValidMove(Position position)
+        {
+            return validMoves.Any(p => p.X == position.X && p.Y == position.Y);
+        }
+
+        private void MoveSelectedPiece(Position target) // bắt đầu đi
+        {
+            if (!IsValidMove(target))
+            {
+                ClearHighlight();
+                selectedPiece = null;
+                return;
+            }
+
+            Piece targetPiece = board.GetPiece(target.X, target.Y);
+            if (targetPiece != null && targetPiece.Color == selectedPiece.Color)
+            {
+                ClearHighlight();
+                selectedPiece = null;
+                return;
+            }
+
+            board.MovePiece(selectedPiece.Position, target);
+            ColorPiece opponent = currentTurn == ColorPiece.White
+            ? ColorPiece.Black
+            : ColorPiece.White;
+            if (board.IsKingCheck(opponent)) // kiểm tra vua bị chiếu
+            {
+                King king = board.FindKing(opponent);
+                Matrix[king.Position.X, king.Position.Y].BackColor = Color.Blue;
+                MessageBox.Show($"Vua {GetOpponentName(opponent)} đang bị chiếu", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            if(targetPiece is King dieKing)
+            {
+                string winner = dieKing.Color == ColorPiece.Black ? "Trắng" : "Đen";
+                MessageBox.Show($"Vua {GetOpponentName(dieKing.Color)} đã chết./n Người chơi {winner} thắng",
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                EndGame();
+                return;
+            }
+
+            if (selectedPiece is Pawn pawn) // kiểm tra có phải là tốt
+            {
+                if (board.IsPromotion(pawn)) // gọi hàm IsPromotion() để kiểm tra màu trắng hay đen đã đi tới cuối chưa
+                {
+                    board.PromatePawn(pawn);
+                }
+            }
+            SwitchTargetTurn();
+            ClearHighlight();
+
+            selectedPiece = null;
+            DrawPieces(board);
+
+            if (currentTurn == ColorPiece.Black) // AI chơi quân đen
+            {
+                MakeAIMove();
+            }
+        }
+
+        public void SwitchTargetTurn()
+        {
+            if (currentTurn == ColorPiece.White)
+            {
+                currentTurn = ColorPiece.Black;
+            }
+            else
+            {
+                currentTurn = ColorPiece.White;
+            }
+            lblTurn.Text = GetCurrentTurn();
+
+           TurnChanged?.Invoke();
         }
 
         public void DrawPieces(Board board)
@@ -100,15 +250,47 @@ namespace Chess_Project
                     if (piece == null)
                         continue;
 
-                    if (System.IO.File.Exists(piece.ImagePath))
-                    {
-                        btn.BackgroundImage = Image.FromFile(piece.ImagePath);
-                        btn.BackgroundImageLayout = ImageLayout.Stretch;
-                    }
+                    btn.BackgroundImage = piece.PieceImage;
+                    btn.BackgroundImageLayout = ImageLayout.Stretch;
                 }
             }
         }
 
+        // hàm hiển thị lượt của ai
+        public string GetCurrentTurn()
+        {
+            return currentTurn == ColorPiece.White ? "Lượt quân trắng" : "Lượt quân đen";
+        }
+
+        private string GetOpponentName(ColorPiece color) // hàm chuyển tên thành trắng, đen thay vì black, white
+        {
+            return color == ColorPiece.White ? "trắng" : "đen";
+        }
+
+        private void EndGame()
+        {
+            foreach(Button btn in Matrix) // khóa bàn cờ
+            {
+                btn.Enabled = false;
+            }
+
+            selectedPiece = null;
+        }
+
+        private void MakeAIMove()
+        {
+            ai = new ChessAI(board);
+
+            Move aiMove = ai.GetBestMove();
+
+            if(aiMove != null)
+            {
+                board.MovePiece(aiMove.From, aiMove.To);
+
+                DrawPieces(board);
+                SwitchTargetTurn();
+            }
+        }
         #endregion
     }
 }

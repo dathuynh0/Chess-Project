@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -56,6 +57,7 @@ namespace Chess_Project
             RemovePiece(from.X, from.Y);
 
             piece.Position = to;
+            piece.HasMoved = true;
             return true;
         }
 
@@ -78,6 +80,32 @@ namespace Chess_Project
             if (piece == null) return false;
 
             return piece.Color == currentColor;
+        }
+        // phong hậu
+        public bool IsPromotion(Piece piece)
+        {
+            if (!(piece is Piece)) return false;
+
+            // tốt màu trắng ở dưới nên tới hàng 0 là cuối cùng nên phong hậu
+            if (piece.Color == ColorPiece.White && piece.Position.X == 0)
+            {
+                return true;
+            }
+
+            // tốt đen ngược lại
+            if (piece.Color == ColorPiece.Black && piece.Position.X == 7)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public void PromatePawn(Pawn pawn) // phong hậu cho tốt
+        {
+            Piece queen = pawn.Promote();
+
+            SetPiece(pawn.Position.X, pawn.Position.Y, queen);
         }
 
         public void SetupPieces()
@@ -117,6 +145,79 @@ namespace Chess_Project
                 Squares[1, i] = new Pawn(ColorPiece.Black, new Position(1, i));
                 Squares[6, i] = new Pawn(ColorPiece.White, new Position(6, i));
             }
+        }
+
+        // kiểm tra vua bị chiếu chưa
+        public King FindKing(ColorPiece colorPiece)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    Piece piece = Squares[i, j];
+
+                    if (piece is King king && king.Color == colorPiece)
+                    {
+                        return king;
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        public bool IsKingCheck(ColorPiece kingColor)
+        {
+            King king = FindKing(kingColor);
+
+            if (king == null) return false;
+
+            Position kingPosition = king.Position;
+
+            // duyệt tất cả quân cờ
+            for (int x = 0; x < 8; x++) 
+            {
+                for (int  y = 0; y < 8; y++)
+                {
+                    Piece piece = Squares[x, y];
+                    if (piece == null) continue;
+                    
+                    // Chỉ xét quân khác màu
+                    if(piece.Color == kingColor)
+                    {
+                        continue;
+                    }
+
+                    List<Position> moves = piece.GetValidMoves(this);
+
+                    if(moves.Any(m => m.X == kingPosition.X && m.Y == kingPosition.Y))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        // hàm phục vụ AI
+        public Board Clone()
+        {
+            Board newBoard = new Board();
+
+            for (int x = 0; x < 8; x++)
+            {
+                for (int y = 0; y < 8; y++)
+                {
+                    Piece p = GetPiece(x, y);
+                    if(p != null)
+                    {
+                        newBoard.SetPiece(x, y, p);
+                    }
+                }
+            }
+
+            return newBoard;
         }
     }
 }
