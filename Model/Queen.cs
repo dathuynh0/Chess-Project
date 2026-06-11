@@ -6,7 +6,17 @@ using System.Threading.Tasks;
 
 namespace Chess_Project.Model
 {
-    internal class Queen
+    public class Queen : Piece
     {
+        public Queen(ColorPiece color, Position position) : base(color, position)
+        {
+            ImagePath = "";
+            Name = "Queen";
+        }
+
+        public override List<Position> GetValidMoves(Board board)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

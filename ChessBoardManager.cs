@@ -31,9 +31,9 @@ namespace Chess_Project
         public void DrawChessBoard()
         {
             Button oldButton = new Button() { Width = 0, Location = new Point(0, 0) };
-            for (int x = 1; x <= 8; x++)
+            for (int x = 0; x < 8; x++)
             {
-                for (int y = 1; y <= 9; y++)
+                for (int y = 0; y < 9; y++)
                 {
                     Button btn = new Button()
                     {

@@ -2,7 +2,6 @@ D:\HocC#\Chess_Project\bin\Debug\Chess_Project.exe.config
 D:\HocC#\Chess_Project\bin\Debug\Chess_Project.exe
 D:\HocC#\Chess_Project\bin\Debug\Chess_Project.pdb
 D:\HocC#\Chess_Project\obj\Debug\Chess_Project.csproj.AssemblyReference.cache
-D:\HocC#\Chess_Project\obj\Debug\Chess_Project.Properties.Resources.resources
 D:\HocC#\Chess_Project\obj\Debug\Chess_Project.csproj.GenerateResource.cache
 D:\HocC#\Chess_Project\obj\Debug\Chess_Project.csproj.CoreCompileInputs.cache
 D:\HocC#\Chess_Project\obj\Debug\Chess_Project.exe

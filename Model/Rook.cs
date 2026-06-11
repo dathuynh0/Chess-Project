@@ -6,7 +6,35 @@ using System.Threading.Tasks;
 
 namespace Chess_Project.Model
 {
-    internal class Rook
+    public class Rook : Piece
     {
+        public Rook(ColorPiece color, Position position) : base(color, position)
+        {
+            Name = "Rook";
+
+            if(color == ColorPiece.Black)
+            {
+                ImagePath = "D:\\HocC#\\Chess_Project\\Resources\\Black_R_5.png";
+            }
+            else
+            {
+                ImagePath = "D:\\HocC#\\Chess_Project\\Resources\\White_R_5.png";
+            }
+        }
+
+        public override List<Position> GetValidMoves(Board board)
+        {
+            List<Position> moves = new List<Position>();
+
+            int[,] directions =
+            {
+                { -1, 0 }, // đi lên 
+                { 1, 0 }, // đi xuống
+                { 0, -1 }, // đi qua trái
+                { 0, 1 } // đi qua phải
+            };
+
+            return moves;
+        }
     }
 }
