@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -120,7 +121,7 @@ namespace Chess_Project
                     return;
                 }
                 selectedPiece = piece;
-                validMoves = piece.GetValidMoves(board);
+                validMoves = piece.GetValidMoves(board); // lấy tất cả đường đi
 
                 HighlightMoves(validMoves);
 
@@ -134,7 +135,7 @@ namespace Chess_Project
         {
             foreach (Position move in moves)
             {
-                Matrix[move.X, move.Y].BackColor = Color.DarkBlue;
+                Matrix[move.X, move.Y].BackColor = Color.SkyBlue;
             }
         }
 
@@ -174,6 +175,7 @@ namespace Chess_Project
             }
 
             Piece targetPiece = board.GetPiece(target.X, target.Y);
+
             if (targetPiece != null && targetPiece.Color == selectedPiece.Color)
             {
                 ClearHighlight();
@@ -187,7 +189,7 @@ namespace Chess_Project
             if (board.IsKingCheck(opponent)) // kiểm tra vua bị chiếu
             {
                 King king = board.FindKing(opponent);
-                Matrix[king.Position.X, king.Position.Y].BackColor = Color.Blue;
+                Matrix[king.Position.X, king.Position.Y].BackColor = Color.Crimson;
                 MessageBox.Show($"Vua {GetOpponentName(opponent)} đang bị chiếu", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -213,6 +215,14 @@ namespace Chess_Project
 
             selectedPiece = null;
             DrawPieces(board);
+
+            // an vua
+            if (targetPiece is King dieKing)
+            {
+                MessageBox.Show("Bạn thắng máy");
+                EndGame();
+                return;
+            }
 
             if (currentTurn == ColorPiece.Black)
             {
@@ -251,7 +261,7 @@ namespace Chess_Project
                         continue;
 
                     btn.BackgroundImage = piece.PieceImage;
-                    btn.BackgroundImageLayout = ImageLayout.Stretch;
+                    btn.BackgroundImageLayout = ImageLayout.Stretch; // cho image vừa button
                 }
             }
         }
@@ -277,20 +287,22 @@ namespace Chess_Project
              */
             Move move = ai.GetBestMove(board, 3);
 
+            Piece targetPiece = board.GetPiece(move.To.X, move.To.Y);
 
-            if (move == null)
+            board.MovePiece(move.From, move.To);
+            DrawPieces(board);
+
+            if (targetPiece is King dieKing)
             {
-                MessageBox.Show("AI không có nước đi");
+                MessageBox.Show("Máy thắng!");
+                EndGame();
                 return;
             }
 
-            board.MovePiece(move.From, move.To);
-
-            DrawPieces(board);
             if (board.IsKingCheck(ColorPiece.White)) // kiểm tra vua bị chiếu
             {
                 King king = board.FindKing(ColorPiece.White);
-                Matrix[king.Position.X, king.Position.Y].BackColor = Color.Blue;
+                Matrix[king.Position.X, king.Position.Y].BackColor = Color.Crimson;
                 MessageBox.Show($"Vua {GetOpponentName(ColorPiece.White)} đang bị chiếu", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }

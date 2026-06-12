@@ -73,10 +73,5 @@ namespace Chess_Project.Model
             return moves;
         }
 
-        public bool CanCastle(Board board)
-        {
-            // nhập thành ...
-            return false;
-        }
     }
 }
