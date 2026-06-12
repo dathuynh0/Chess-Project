@@ -220,5 +220,44 @@ namespace Chess_Project
 
             return clone;
         }
+
+        public bool IsCheckMate(ColorPiece color) // checkmate
+        {
+            return IsKingCheck(color) &&
+                   !HasAnyLegalMove(color);
+        }
+
+        public bool HasAnyLegalMove(ColorPiece color) // kiểm tra còn đường đi không
+        {
+            for (int x = 0; x < 8; x++)
+            {
+                for (int y = 0; y < 8; y++)
+                {
+                    Piece piece = GetPiece(x, y);
+
+                    if (piece == null || piece.Color != color)
+                        continue;
+
+                    List<Position> moves = piece.GetValidMoves(this);
+
+                    foreach (Position move in moves)
+                    {
+                        Board clone = Clone();
+
+                        clone.MovePiece(
+                            new Position(piece.Position.X, piece.Position.Y),
+                            new Position(move.X, move.Y));
+
+                        // Sau khi đi thử, vua mình không bị chiếu
+                        if (!clone.IsKingCheck(color))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
+        }
     }
 }

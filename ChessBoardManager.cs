@@ -2,6 +2,7 @@
 using Chess_Project.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace Chess_Project
         private List<Position> validMoves;
         private ColorPiece currentTurn; // lượt của ai
         public event Action TurnChanged;
+        private bool gameOver = false;
 
         // tạo AI
         private ChessAI ai;
@@ -180,9 +182,7 @@ namespace Chess_Project
             }
 
             board.MovePiece(selectedPiece.Position, target);
-            ColorPiece opponent = currentTurn == ColorPiece.White
-            ? ColorPiece.Black
-            : ColorPiece.White;
+            ColorPiece opponent = currentTurn == ColorPiece.White ? ColorPiece.Black : ColorPiece.White;
             if (board.IsKingCheck(opponent)) // kiểm tra vua bị chiếu
             {
                 King king = board.FindKing(opponent);
@@ -191,13 +191,12 @@ namespace Chess_Project
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
-            if(targetPiece is King dieKing)
+            if (board.IsCheckMate(ColorPiece.Black))
             {
-                string winner = dieKing.Color == ColorPiece.Black ? "Trắng" : "Đen";
-                MessageBox.Show($"Vua {GetOpponentName(dieKing.Color)} đã chết. Người chơi {winner} thắng",
-                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Chiếu hết! Quân trắng thắng!");
 
-                EndGame();
+                LockBoard();
+
                 return;
             }
 
@@ -216,7 +215,7 @@ namespace Chess_Project
 
             if (currentTurn == ColorPiece.Black)
             {
-                MakeAIMove();
+                AIMove();
             }
         }
 
@@ -267,23 +266,13 @@ namespace Chess_Project
             return color == ColorPiece.White ? "trắng" : "đen";
         }
 
-        private void EndGame()
-        {
-            foreach(Button btn in Matrix) // khóa bàn cờ
-            {
-                btn.Enabled = false;
-            }
-
-            selectedPiece = null;
-        }
-
-        private void MakeAIMove()
+        private void AIMove()
         {
             /*
-             Depth = 1  : rất yếu
+             Depth = 1  : yếu
              Depth = 2  : dễ
-             Depth = 3  : khá mạnh
-             Depth = 4  : bắt đầu chậm
+             Depth = 3  : khá
+             Depth = 4  : mạnh
              */
             Move move = ai.GetBestMove(board, 3);
 
@@ -297,8 +286,34 @@ namespace Chess_Project
             board.MovePiece(move.From, move.To);
 
             DrawPieces(board);
+            if (board.IsKingCheck(ColorPiece.White)) // kiểm tra vua bị chiếu
+            {
+                King king = board.FindKing(ColorPiece.White);
+                Matrix[king.Position.X, king.Position.Y].BackColor = Color.Blue;
+                MessageBox.Show($"Vua {GetOpponentName(ColorPiece.White)} đang bị chiếu", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            // kiểm tra còn đường không
+            if (board.IsCheckMate(ColorPiece.White))
+            {
+                MessageBox.Show("Chiếu hết! Quân đen thắng!");
+
+                LockBoard();
+
+                return;
+            }
 
             SwitchTargetTurn();
+        }
+
+        public void LockBoard()
+        {
+            gameOver = true;
+
+            foreach (Button btn in Matrix)
+            {
+                btn.Enabled = false;
+            }
         }
         #endregion
     }
