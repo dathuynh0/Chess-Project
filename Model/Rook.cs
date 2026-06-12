@@ -9,17 +9,26 @@ namespace Chess_Project.Model
 {
     public class Rook : Piece
     {
+        public override int Value => 500;
+        public override Piece Clone()
+        {
+            Rook rook = new Rook( Color, new Position(Position.X, Position.Y));
+
+            rook.HasMoved = HasMoved;
+
+            return rook;
+        }
         public Rook(ColorPiece color, Position position) : base(color, position)
         {
             Name = "Rook";
 
             if(color == ColorPiece.Black)
             {
-                PieceImage = Image.FromFile("D:\\HocC#\\Chess_Project\\Resources\\Black_R_5.png");
+                PieceImage = PieceImages.BlackRook;
             }
             else
             {
-                PieceImage = Image.FromFile("D:\\HocC#\\Chess_Project\\Resources\\White_R_5.png");
+                PieceImage = PieceImages.WhiteRook;
             }
         }
 

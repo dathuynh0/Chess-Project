@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AI\BoardEvaluator.cs" />
     <Compile Include="AI\ChessAi.cs" />
     <Compile Include="Board.cs" />
     <Compile Include="ChessBoardManager.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Model\Move.cs" />
     <Compile Include="Model\Pawn.cs" />
     <Compile Include="Model\Piece.cs" />
+    <Compile Include="Model\PieceImages.cs" />
     <Compile Include="Model\Position.cs" />
     <Compile Include="Model\Queen.cs" />
     <Compile Include="Model\Rook.cs" />

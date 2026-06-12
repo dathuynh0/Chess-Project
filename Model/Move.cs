@@ -10,5 +10,11 @@ namespace Chess_Project.Model
     {
         public Position From {  get; set; }
         public Position To { get; set; }
+
+        public Move(Position from, Position to)
+        {
+            this.From = from;
+            this.To = to;
+        }
     }
 }

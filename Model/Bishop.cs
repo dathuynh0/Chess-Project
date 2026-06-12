@@ -9,17 +9,26 @@ namespace Chess_Project.Model
 {
     public class Bishop : Piece
     {
+        public override int Value => 330;
+        public override Piece Clone()
+        {
+            Bishop bishop = new Bishop( Color, new Position(Position.X, Position.Y));
+
+            bishop.HasMoved = HasMoved;
+
+            return bishop;
+        }
         public Bishop(ColorPiece color, Position position) : base(color, position)
         {
             Name = "Bishop";
 
             if (color == ColorPiece.Black)
             {
-                PieceImage = Image.FromFile("D:\\HocC#\\Chess_Project\\Resources\\Black_B_5.png");
+                PieceImage = PieceImages.BlackBishop;
             }
             else
             {
-                PieceImage = Image.FromFile("D:\\HocC#\\Chess_Project\\Resources\\White_B_5.png");
+                PieceImage = PieceImages.WhiteBishop;
             } 
                 
         }

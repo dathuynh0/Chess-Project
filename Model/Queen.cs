@@ -9,17 +9,26 @@ namespace Chess_Project.Model
 {
     public class Queen : Piece
     {
+        public override int Value => 900;
+        public override Piece Clone()
+        {
+            Queen queen = new Queen( Color, new Position(Position.X, Position.Y));
+
+            queen.HasMoved = HasMoved;
+
+            return queen;
+        }
         public Queen(ColorPiece color, Position position) : base(color, position)
         {
             Name = "Queen";
 
             if(color == ColorPiece.Black)
             {
-                PieceImage = Image.FromFile("D:\\HocC#\\Chess_Project\\Resources\\Black_Q_5.png");
+                PieceImage = PieceImages.BlackQueen;
             }
             else
             {
-                PieceImage = Image.FromFile("D:\\HocC#\\Chess_Project\\Resources\\White_Q_5.png");
+                PieceImage = PieceImages.WhiteQueen;
             }    
         }
 

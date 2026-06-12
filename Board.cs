@@ -56,7 +56,7 @@ namespace Chess_Project
             SetPiece(to.X, to.Y, piece);
             RemovePiece(from.X, from.Y);
 
-            piece.Position = to;
+            piece.Position = new Position(to.X, to.Y);
             piece.HasMoved = true;
             return true;
         }
@@ -203,21 +203,22 @@ namespace Chess_Project
         // hàm phục vụ AI
         public Board Clone()
         {
-            Board newBoard = new Board();
+            Board clone = new Board();
 
             for (int x = 0; x < 8; x++)
             {
                 for (int y = 0; y < 8; y++)
                 {
-                    Piece p = GetPiece(x, y);
-                    if(p != null)
-                    {
-                        newBoard.SetPiece(x, y, p);
-                    }
+                    Piece piece = GetPiece(x, y);
+
+                    if (piece == null)
+                        continue;
+
+                    clone.SetPiece(x, y, piece.Clone());
                 }
             }
 
-            return newBoard;
+            return clone;
         }
     }
 }

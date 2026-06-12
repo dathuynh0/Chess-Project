@@ -47,7 +47,7 @@ namespace Chess_Project
             currentTurn = ColorPiece.White;
 
             // khởi tạo ai
-            ai = new ChessAI(board);
+            ai = new ChessAI();
         }
 
         #endregion
@@ -194,7 +194,7 @@ namespace Chess_Project
             if(targetPiece is King dieKing)
             {
                 string winner = dieKing.Color == ColorPiece.Black ? "Trắng" : "Đen";
-                MessageBox.Show($"Vua {GetOpponentName(dieKing.Color)} đã chết./n Người chơi {winner} thắng",
+                MessageBox.Show($"Vua {GetOpponentName(dieKing.Color)} đã chết. Người chơi {winner} thắng",
                     "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 EndGame();
@@ -214,7 +214,7 @@ namespace Chess_Project
             selectedPiece = null;
             DrawPieces(board);
 
-            if (currentTurn == ColorPiece.Black) // AI chơi quân đen
+            if (currentTurn == ColorPiece.Black)
             {
                 MakeAIMove();
             }
@@ -279,17 +279,26 @@ namespace Chess_Project
 
         private void MakeAIMove()
         {
-            ai = new ChessAI(board);
+            /*
+             Depth = 1  : rất yếu
+             Depth = 2  : dễ
+             Depth = 3  : khá mạnh
+             Depth = 4  : bắt đầu chậm
+             */
+            Move move = ai.GetBestMove(board, 3);
 
-            Move aiMove = ai.GetBestMove();
 
-            if(aiMove != null)
+            if (move == null)
             {
-                board.MovePiece(aiMove.From, aiMove.To);
-
-                DrawPieces(board);
-                SwitchTargetTurn();
+                MessageBox.Show("AI không có nước đi");
+                return;
             }
+
+            board.MovePiece(move.From, move.To);
+
+            DrawPieces(board);
+
+            SwitchTargetTurn();
         }
         #endregion
     }

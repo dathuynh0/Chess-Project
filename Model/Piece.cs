@@ -15,6 +15,9 @@ namespace Chess_Project.Model
         public Image PieceImage { get; protected set; }
         public string Name { get; set; }
         public bool HasMoved { get; set; }
+        
+        public virtual int Value { get { return 0; } }
+        public abstract Piece Clone();
 
         public Piece (ColorPiece color, Position position)
         {

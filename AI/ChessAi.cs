@@ -9,107 +9,157 @@ namespace Chess_Project.AI
 {
     public class ChessAI
     {
-        private Board board;
+        private Random random = new Random();
+        private BoardEvaluator boardEvaluator = new BoardEvaluator();
 
-        public ChessAI(Board board)
+        public Move GetRandomMove(Board board)
         {
-            this.board = board;
+            List<Move> moves = GetAllMoves(board, ColorPiece.Black);
+
+            if (moves.Count == 0)
+                return null;
+
+            return moves[random.Next(moves.Count)];
         }
 
-        public Move GetBestMove()
-        {
-            List<Move> allMoves = GetAllMoves(ColorPiece.Black); // AI cho quân đen
-
-            Move bestMove = null;
-            int bestScore = int.MinValue;
-
-            foreach (Move move in allMoves)
-            {
-                Board copy = board.Clone();
-                copy.MovePiece(move.From, move.To);
-
-                // tránh nước đi tự sát
-                if (copy.IsKingCheck(ColorPiece.Black))
-                {
-                    continue;
-                }
-
-                int score = EvaluateBoard(copy);
-
-                if(score > bestScore)
-                {
-                    bestScore = score;
-                    bestMove = move;
-                } 
-            }
-
-            return bestMove;
-        }
-
-        public List<Move> GetAllMoves(ColorPiece colorPiece) // lấy tất cả đường đi
+        private List<Move> GetAllMoves(Board board, ColorPiece color)
         {
             List<Move> moves = new List<Move>();
 
-            for(int x = 0; x < 8; x++)
+            for (int x = 0; x < 8; x++)
             {
-                for(int y = 0; y < 8; y++)
+                for (int y = 0; y < 8; y++)
                 {
-                    Piece p = board.GetPiece(x, y); // lấy vị trí hiện tại của quân cờ
+                    Piece piece = board.GetPiece(x, y);
 
-                    if(p == null || p.Color != colorPiece) continue; // nếu ô trông hoặc không cùng phe thì bỏ qua
+                    if (piece == null)
+                        continue;
 
-                    var valid = p.GetValidMoves(board);
+                    if (piece.Color != color)
+                        continue;
 
-                    foreach (var move in valid) // duyệt từng nước đi
+                    foreach (Position pos in piece.GetValidMoves(board))
                     {
-                        moves.Add(new Move // lưu vào danh sách moves
-                        {
-                            From = new Position(x, y),
-                            To = move
-                        });
+                        moves.Add(new Move(piece.Position, pos));
                     }
-                }    
+                }
             }
+
             return moves;
         }
 
-        private int EvaluateBoard(Board board) // tính điểm
+        public int AlphaBeta(Board board, int depth, int alpha, int beta, bool maximizingPlayer)
         {
-            int score = 0;
-
-            for (int x = 0;x < 8; x++)
+            if (depth == 0)
             {
-                for(int y = 0; y < 8; y++)
-                {
-                    Piece piece = board.GetPiece(x, y);
-                    if(piece == null) continue;
-
-                    int value = GetPieceValue(piece);
-
-                    if(piece.Color == ColorPiece.Black)
-                    {
-                        score += value;
-                    }
-                    else
-                    {
-                        score -= value;
-                    }    
-                } 
+                return boardEvaluator.Evaluate(board);
             }
 
-            return score;
+            ColorPiece color = maximizingPlayer ? ColorPiece.Black : ColorPiece.White;
+
+            List<Move> moves = GetAllMoves(board, color);
+
+            if (moves.Count == 0)
+            {
+                return boardEvaluator.Evaluate(board);
+            }
+            moves = moves.OrderByDescending(m =>
+            {
+                Piece target = board.GetPiece(m.To.X, m.To.Y);
+
+                return target?.Value ?? 0;
+            }).ToList();
+
+            // Max Đen
+            if (maximizingPlayer)
+            {
+                int bestScore = int.MinValue;
+
+                foreach (Move move in moves)
+                {
+                    Board clone = board.Clone();
+
+                    clone.MovePiece(move.From, move.To);
+
+                    int score = AlphaBeta(clone, depth - 1, alpha, beta, false);
+
+                    bestScore = Math.Max(bestScore, score);
+
+                    alpha = Math.Max(alpha, bestScore);
+
+                    // Cắt nhánh
+                    if (beta <= alpha)
+                    {
+                        break;
+                    }
+                }
+
+                return bestScore;
+            }
+            // MIN (Người chơi Trắng)
+            else
+            {
+                int bestScore = int.MaxValue;
+
+                foreach (Move move in moves)
+                {
+                    Board clone = board.Clone();
+
+                    clone.MovePiece(move.From, move.To);
+
+                    int score = AlphaBeta(clone, depth - 1, alpha, beta, true);
+
+                    bestScore = Math.Min(bestScore, score);
+
+                    beta = Math.Min(beta, bestScore);
+
+                    // Cắt nhánh
+                    if (beta <= alpha)
+                    {
+                        break;
+                    }
+                }
+
+                return bestScore;
+            }
         }
 
-        private int GetPieceValue(Piece piece)
-        {
-            if (piece is Pawn) return 1; // tốt
-            if (piece is Knight) return 3; // ngựa
-            if (piece is Bishop) return 3; // tượng
-            if (piece is Rook) return 5; // xe
-            if (piece is Queen) return 9; // hậu
-            if (piece is King) return 1000; // vua
 
-            return 0;
+        public Move GetBestMove(Board board, int depth)
+        {
+            /*
+             Depth = 1  : rất yếu
+             Depth = 2  : dễ
+             Depth = 3  : khá mạnh
+             Depth = 4  : bắt đầu chậm
+             */
+            Move bestMove = null;
+            int bestScore = int.MinValue;
+
+            List<Move> moves = GetAllMoves(board, ColorPiece.Black);
+
+            moves = moves.OrderByDescending(m =>
+            {
+                Piece target = board.GetPiece(m.To.X, m.To.Y);
+
+                return target?.Value ?? 0;
+            }).ToList();
+
+            foreach (Move move in moves)
+            {
+                Board clone = board.Clone();
+                clone.MovePiece(move.From, move.To);
+
+                int score = AlphaBeta(clone, depth - 1, int.MinValue, int.MaxValue, false);
+
+                if (score > bestScore)
+                {
+                    bestScore = score;
+                    bestMove = move;
+                }
+            }
+
+            return bestMove;
         }
     }
 }

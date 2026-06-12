@@ -9,17 +9,26 @@ namespace Chess_Project.Model
 {
     public class Pawn : Piece
     {
+        public override int Value => 100;
+        public override Piece Clone()
+        {
+            Pawn pawn = new Pawn( Color,  new Position(Position.X, Position.Y));
+
+            pawn.HasMoved = HasMoved;
+
+            return pawn;
+        }
         public Pawn(ColorPiece color, Position position) : base(color, position)
         {
             Name = "Pawn";
 
             if (color == ColorPiece.Black) 
             {
-                PieceImage = Image.FromFile("D:\\HocC#\\Chess_Project\\Resources\\Black_P_5.png");
+                PieceImage = PieceImages.BlackPawn;  
             }
             else
             {
-                PieceImage = Image.FromFile("D:\\HocC#\\Chess_Project\\Resources\\White_P_5.png");
+                PieceImage = PieceImages.WhitePawn;
             }
         }
 
