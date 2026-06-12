@@ -12,16 +12,6 @@ namespace Chess_Project.AI
         private Random random = new Random();
         private BoardEvaluator boardEvaluator = new BoardEvaluator();
 
-        public Move GetRandomMove(Board board)
-        {
-            List<Move> moves = GetAllMoves(board, ColorPiece.Black);
-
-            if (moves.Count == 0)
-                return null;
-
-            return moves[random.Next(moves.Count)];
-        }
-
         private List<Move> GetAllMoves(Board board, ColorPiece color)
         {
             List<Move> moves = new List<Move>();
@@ -47,7 +37,8 @@ namespace Chess_Project.AI
 
             return moves;
         }
-
+        // board: trạng thài bàn cờ, depth: độ sâu tìm kiếm, alpha: điểm tốt nhất Max, beta: điểm tốt nhât MIN
+        // maximingzingPlayer: true lượt Đen, false lượt trắng
         public int AlphaBeta(Board board, int depth, int alpha, int beta, bool maximizingPlayer)
         {
             if (depth == 0)
@@ -63,14 +54,8 @@ namespace Chess_Project.AI
             {
                 return boardEvaluator.Evaluate(board);
             }
-            moves = moves.OrderByDescending(m =>
-            {
-                Piece target = board.GetPiece(m.To.X, m.To.Y);
 
-                return target?.Value ?? 0;
-            }).ToList();
-
-            // Max Đen
+            // Max Đen AI
             if (maximizingPlayer)
             {
                 int bestScore = int.MinValue;
@@ -86,12 +71,6 @@ namespace Chess_Project.AI
                     bestScore = Math.Max(bestScore, score);
 
                     alpha = Math.Max(alpha, bestScore);
-
-                    // Cắt nhánh
-                    if (beta <= alpha)
-                    {
-                        break;
-                    }
                 }
 
                 return bestScore;
@@ -112,12 +91,6 @@ namespace Chess_Project.AI
                     bestScore = Math.Min(bestScore, score);
 
                     beta = Math.Min(beta, bestScore);
-
-                    // Cắt nhánh
-                    if (beta <= alpha)
-                    {
-                        break;
-                    }
                 }
 
                 return bestScore;
@@ -137,13 +110,6 @@ namespace Chess_Project.AI
             int bestScore = int.MinValue;
 
             List<Move> moves = GetAllMoves(board, ColorPiece.Black);
-
-            moves = moves.OrderByDescending(m =>
-            {
-                Piece target = board.GetPiece(m.To.X, m.To.Y);
-
-                return target?.Value ?? 0;
-            }).ToList();
 
             foreach (Move move in moves)
             {

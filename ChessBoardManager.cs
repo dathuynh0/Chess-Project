@@ -20,7 +20,7 @@ namespace Chess_Project
         private Board board;
         private Piece selectedPiece;
         private List<Position> validMoves;
-        private ColorPiece currentTurn; // lượt của ai
+        public ColorPiece currentTurn; // lượt của ai
         public event Action TurnChanged;
         private bool gameOver = false;
 
@@ -182,6 +182,7 @@ namespace Chess_Project
             }
 
             board.MovePiece(selectedPiece.Position, target);
+
             ColorPiece opponent = currentTurn == ColorPiece.White ? ColorPiece.Black : ColorPiece.White;
             if (board.IsKingCheck(opponent)) // kiểm tra vua bị chiếu
             {
@@ -195,7 +196,7 @@ namespace Chess_Project
             {
                 MessageBox.Show("Chiếu hết! Quân trắng thắng!");
 
-                LockBoard();
+                EndGame();
 
                 return;
             }
@@ -266,7 +267,7 @@ namespace Chess_Project
             return color == ColorPiece.White ? "trắng" : "đen";
         }
 
-        private void AIMove()
+        public void AIMove()
         {
             /*
              Depth = 1  : yếu
@@ -298,7 +299,7 @@ namespace Chess_Project
             {
                 MessageBox.Show("Chiếu hết! Quân đen thắng!");
 
-                LockBoard();
+                EndGame();
 
                 return;
             }
@@ -306,7 +307,7 @@ namespace Chess_Project
             SwitchTargetTurn();
         }
 
-        public void LockBoard()
+        public void EndGame()
         {
             gameOver = true;
 

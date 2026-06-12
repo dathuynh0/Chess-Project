@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Chess_Project.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -61,7 +62,17 @@ namespace Chess_Project
             if (timeLeft <= 0)
             {
                 turnTimer.Stop();
-                chessBoard.SwitchTargetTurn();
+
+                if(chessBoard.currentTurn == ColorPiece.White)
+                {
+                    chessBoard.SwitchTargetTurn();
+                    chessBoard.AIMove();
+                }
+                else
+                {
+                    chessBoard.SwitchTargetTurn();
+                }
+
                 StartTurn();
             }
         }
