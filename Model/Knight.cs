@@ -9,7 +9,7 @@ namespace Chess_Project.Model
 {
     public class Knight : Piece
     {
-        public override int Value => 320;
+        public override int Value => 330;
         public override Piece Clone()
         {
             Knight knight = new Knight( Color, new Position(Position.X, Position.Y));

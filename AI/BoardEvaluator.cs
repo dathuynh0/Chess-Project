@@ -11,6 +11,12 @@ namespace Chess_Project.AI
     {
         public int Evaluate(Board board)
         {
+            if (board.IsCheckMate(ColorPiece.White)) // Người
+                return 1000000;
+
+            if (board.IsCheckMate(ColorPiece.Black)) // AI
+                return -1000000;
+
             int score = 0;
 
             for (int x = 0; x < 8; x++)
