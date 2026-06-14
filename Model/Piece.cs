@@ -27,10 +27,5 @@ namespace Chess_Project.Model
         }
 
         public abstract List<Position> GetValidMoves(Board board); // tất cả các ô mà quân cờ có thể đi.
-        public virtual void Move(Position newPosition)
-        {
-            this.Position = newPosition;
-            HasMoved = true;
-        }
     }
 }

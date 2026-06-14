@@ -59,14 +59,14 @@ namespace Chess_Project.Model
                     continue;
 
                 Piece targetPiece = board.GetPiece(newX, newY);
+                Position newPos = new Position(newX, newY);
 
-                if (targetPiece == null)
+                if (targetPiece == null || targetPiece.Color != Color)
                 {
-                    moves.Add(new Position(newX, newY));
-                }
-                else if (targetPiece.Color != Color)
-                {
-                    moves.Add(new Position(newX, newY));
+                   if(board.IsSafeMove(this, newPos))
+                   {
+                        moves.Add(newPos);
+                   }
                 }
             }
 

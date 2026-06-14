@@ -188,9 +188,22 @@ namespace Chess_Project
                         continue;
                     }
 
+                    // King
+                    if (piece is King)
+                    {
+                        if (Math.Abs(piece.Position.X - kingPosition.X) <= 1 &&
+                            Math.Abs(piece.Position.Y - kingPosition.Y) <= 1)
+                        {
+                            return true;
+                        }
+
+                        continue;
+                    }
+                    // Các quân còn lại
                     List<Position> moves = piece.GetValidMoves(this);
 
-                    if(moves.Any(m => m.X == kingPosition.X && m.Y == kingPosition.Y))
+                    if (moves.Any(m => m.X == kingPosition.X &&
+                                       m.Y == kingPosition.Y))
                     {
                         return true;
                     }
@@ -258,6 +271,17 @@ namespace Chess_Project
             }
 
             return false;
+        }
+
+        // kiểm tra ô an toàn
+        public bool IsSafeMove(Piece piece, Position to)
+        {
+            Board clone = Clone();
+
+            Position from = new Position(piece.Position.X, piece.Position.Y);
+            clone.MovePiece(from, to);
+
+            return !clone.IsKingCheck(piece.Color);
         }
     }
 }

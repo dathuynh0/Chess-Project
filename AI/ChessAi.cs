@@ -39,7 +39,7 @@ namespace Chess_Project.AI
         }
         // board: trạng thài bàn cờ, depth: độ sâu tìm kiếm, alpha: điểm tốt nhất Max, beta: điểm tốt nhât MIN
         // maximingzingPlayer: true lượt Đen, false lượt trắng
-        public int AlphaBeta(Board board, int depth, int alpha, int beta, bool maximizingPlayer)
+        public int Minimax(Board board, int depth, int alpha, int beta, bool maximizingPlayer)
         {
             if (depth == 0)
             {
@@ -66,11 +66,16 @@ namespace Chess_Project.AI
 
                     clone.MovePiece(move.From, move.To);
 
-                    int score = AlphaBeta(clone, depth - 1, alpha, beta, false);
+                    int score = Minimax(clone, depth - 1, alpha, beta, false);
 
                     bestScore = Math.Max(bestScore, score);
 
                     alpha = Math.Max(alpha, bestScore);
+
+                    if(beta <= alpha)
+                    {
+                        return bestScore;
+                    }
                 }
 
                 return bestScore;
@@ -86,11 +91,16 @@ namespace Chess_Project.AI
 
                     clone.MovePiece(move.From, move.To);
 
-                    int score = AlphaBeta(clone, depth - 1, alpha, beta, true);
+                    int score = Minimax(clone, depth - 1, alpha, beta, true);
 
                     bestScore = Math.Min(bestScore, score);
 
                     beta = Math.Min(beta, bestScore);
+
+                    if(beta <= alpha)
+                    {
+                        return bestScore;
+                    }
                 }
 
                 return bestScore;
@@ -116,7 +126,7 @@ namespace Chess_Project.AI
                 Board clone = board.Clone();
                 clone.MovePiece(move.From, move.To);
 
-                int score = AlphaBeta(clone, depth - 1, int.MinValue, int.MaxValue, false);
+                int score = Minimax(clone, depth - 1, int.MinValue, int.MaxValue, false);
 
                 if (score > bestScore)
                 {

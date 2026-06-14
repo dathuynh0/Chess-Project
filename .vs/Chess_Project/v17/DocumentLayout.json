@@ -7,6 +7,14 @@
       "RelativeMoniker": "D:0:0:{6DACDAF7-7B70-4424-9D0C-C4D97AE7ED0D}|Chess_Project.csproj|solutionrelative:chessboardmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{6DACDAF7-7B70-4424-9D0C-C4D97AE7ED0D}|Chess_Project.csproj|d:\\hocc#\\chess_project\\board.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6DACDAF7-7B70-4424-9D0C-C4D97AE7ED0D}|Chess_Project.csproj|solutionrelative:board.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6DACDAF7-7B70-4424-9D0C-C4D97AE7ED0D}|Chess_Project.csproj|d:\\hocc#\\chess_project\\model\\king.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6DACDAF7-7B70-4424-9D0C-C4D97AE7ED0D}|Chess_Project.csproj|solutionrelative:model\\king.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{6DACDAF7-7B70-4424-9D0C-C4D97AE7ED0D}|Chess_Project.csproj|D:\\HocC#\\Chess_Project\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6DACDAF7-7B70-4424-9D0C-C4D97AE7ED0D}|Chess_Project.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -18,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,15 +38,29 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Form1.cs",
-              "DocumentMoniker": "D:\\HocC#\\Chess_Project\\Form1.cs",
-              "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "D:\\HocC#\\Chess_Project\\Form1.cs",
-              "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAAAAC8AAAAJAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "King.cs",
+              "DocumentMoniker": "D:\\HocC#\\Chess_Project\\Model\\King.cs",
+              "RelativeDocumentMoniker": "Model\\King.cs",
+              "ToolTip": "D:\\HocC#\\Chess_Project\\Model\\King.cs",
+              "RelativeToolTip": "Model\\King.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAA6wC4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-11T10:48:39.396Z"
+              "WhenOpened": "2026-06-14T07:10:13.2Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Board.cs",
+              "DocumentMoniker": "D:\\HocC#\\Chess_Project\\Board.cs",
+              "RelativeDocumentMoniker": "Board.cs",
+              "ToolTip": "D:\\HocC#\\Chess_Project\\Board.cs",
+              "RelativeToolTip": "Board.cs",
+              "ViewState": "AgIAALoAAAAAAAAAAAAiwL4AAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-14T07:07:17.405Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -46,12 +68,24 @@
               "Title": "ChessBoardManager.cs",
               "DocumentMoniker": "D:\\HocC#\\Chess_Project\\ChessBoardManager.cs",
               "RelativeDocumentMoniker": "ChessBoardManager.cs",
-              "ToolTip": "D:\\HocC#\\Chess_Project\\ChessBoardManager.cs",
-              "RelativeToolTip": "ChessBoardManager.cs",
-              "ViewState": "AgIAAMYAAAAAAAAAAAAYwNgAAAAeAAAAAAAAAA==",
+              "ToolTip": "D:\\HocC#\\Chess_Project\\ChessBoardManager.cs*",
+              "RelativeToolTip": "ChessBoardManager.cs*",
+              "ViewState": "AgIAAA8BAAAAAAAAAADwvx4BAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-11T10:33:46.122Z",
+              "WhenOpened": "2026-06-14T04:54:45.475Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "D:\\HocC#\\Chess_Project\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "D:\\HocC#\\Chess_Project\\Form1.cs",
+              "RelativeToolTip": "Form1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAD4vxAAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-11T10:48:39.396Z"
             }
           ]
         }
