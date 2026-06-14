@@ -73,10 +73,19 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -87,7 +96,40 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <None Include="Resources\Black_B_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Black_K_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Black_N_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Black_P_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Black_Q_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Black_R_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\White_B_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\White_K_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\White_N_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\White_P_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\White_Q_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\White_R_5.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

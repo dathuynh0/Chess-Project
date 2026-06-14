@@ -2,47 +2,26 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Chess_Project.Properties;
 
 namespace Chess_Project.Model
 {
     public static class PieceImages
     {
-        public static readonly Image WhitePawn =
-            Image.FromFile(@"D:\HocC#\Chess_Project\Resources\White_P_5.png");
-
-        public static readonly Image BlackPawn =
-            Image.FromFile(@"D:\HocC#\Chess_Project\Resources\Black_P_5.png");
-
-        public static readonly Image WhiteRook =
-            Image.FromFile(@"D:\HocC#\Chess_Project\Resources\White_R_5.png");
-
-        public static readonly Image BlackRook =
-            Image.FromFile(@"D:\HocC#\Chess_Project\Resources\Black_R_5.png");
-
-        public static readonly Image WhiteKnight =
-            Image.FromFile(@"D:\HocC#\Chess_Project\Resources\White_N_5.png");
-
-        public static readonly Image BlackKnight =
-            Image.FromFile(@"D:\HocC#\Chess_Project\Resources\Black_N_5.png");
-
-        public static readonly Image WhiteBishop =
-            Image.FromFile(@"D:\HocC#\Chess_Project\Resources\White_B_5.png");
-
-        public static readonly Image BlackBishop =
-            Image.FromFile(@"D:\HocC#\Chess_Project\Resources\Black_B_5.png");
-
-        public static readonly Image WhiteQueen =
-            Image.FromFile(@"D:\HocC#\Chess_Project\Resources\White_Q_5.png");
-
-        public static readonly Image BlackQueen =
-            Image.FromFile(@"D:\HocC#\Chess_Project\Resources\Black_Q_5.png");
-
-        public static readonly Image WhiteKing =
-            Image.FromFile(@"D:\HocC#\Chess_Project\Resources\White_K_5.png");
-
-        public static readonly Image BlackKing =
-            Image.FromFile(@"D:\HocC#\Chess_Project\Resources\Black_K_5.png");
+        public static readonly Image WhitePawn = Resources.White_P_5;
+        public static readonly Image BlackPawn = Resources.Black_P_5;
+        public static readonly Image WhiteRook = Resources.White_R_5;
+        public static readonly Image BlackRook = Resources.Black_R_5;
+        public static readonly Image WhiteKnight = Resources.White_N_5;
+        public static readonly Image BlackKnight = Resources.Black_N_5;
+        public static readonly Image WhiteBishop = Resources.White_B_5;
+        public static readonly Image BlackBishop = Resources.Black_B_5;
+        public static readonly Image WhiteQueen = Resources.White_Q_5;
+        public static readonly Image BlackQueen = Resources.Black_Q_5;
+        public static readonly Image WhiteKing = Resources.White_K_5;
+        public static readonly Image BlackKing = Resources.Black_K_5;
     }
 }

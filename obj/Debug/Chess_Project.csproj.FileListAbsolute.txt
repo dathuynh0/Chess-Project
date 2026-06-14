@@ -8,3 +8,4 @@ D:\HocC#\Chess_Project\obj\Debug\Chess_Project.exe
 D:\HocC#\Chess_Project\obj\Debug\Chess_Project.pdb
 D:\HocC#\Chess_Project\obj\Debug\Chess_Project.exe.config
 D:\HocC#\Chess_Project\obj\Debug\Chess_Project.frmMain.resources
+D:\HocC#\Chess_Project\obj\Debug\Chess_Project.Properties.Resources.resources

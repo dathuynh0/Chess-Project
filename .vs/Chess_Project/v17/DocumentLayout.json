@@ -3,16 +3,24 @@
   "WorkspaceRootPath": "D:\\HocC#\\Chess_Project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6DACDAF7-7B70-4424-9D0C-C4D97AE7ED0D}|Chess_Project.csproj|d:\\hocc#\\chess_project\\chessboardmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6DACDAF7-7B70-4424-9D0C-C4D97AE7ED0D}|Chess_Project.csproj|solutionrelative:chessboardmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6DACDAF7-7B70-4424-9D0C-C4D97AE7ED0D}|Chess_Project.csproj|d:\\hocc#\\chess_project\\ai\\boardevaluator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6DACDAF7-7B70-4424-9D0C-C4D97AE7ED0D}|Chess_Project.csproj|solutionrelative:ai\\boardevaluator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6DACDAF7-7B70-4424-9D0C-C4D97AE7ED0D}|Chess_Project.csproj|d:\\hocc#\\chess_project\\board.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{6DACDAF7-7B70-4424-9D0C-C4D97AE7ED0D}|Chess_Project.csproj|d:\\hocc#\\chess_project\\ai\\chessai.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6DACDAF7-7B70-4424-9D0C-C4D97AE7ED0D}|Chess_Project.csproj|solutionrelative:ai\\chessai.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6DACDAF7-7B70-4424-9D0C-C4D97AE7ED0D}|Chess_Project.csproj|D:\\HocC#\\Chess_Project\\board.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6DACDAF7-7B70-4424-9D0C-C4D97AE7ED0D}|Chess_Project.csproj|solutionrelative:board.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6DACDAF7-7B70-4424-9D0C-C4D97AE7ED0D}|Chess_Project.csproj|d:\\hocc#\\chess_project\\model\\king.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6DACDAF7-7B70-4424-9D0C-C4D97AE7ED0D}|Chess_Project.csproj|solutionrelative:model\\king.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6DACDAF7-7B70-4424-9D0C-C4D97AE7ED0D}|Chess_Project.csproj|d:\\hocc#\\chess_project\\model\\pieceimages.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6DACDAF7-7B70-4424-9D0C-C4D97AE7ED0D}|Chess_Project.csproj|solutionrelative:model\\pieceimages.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6DACDAF7-7B70-4424-9D0C-C4D97AE7ED0D}|Chess_Project.csproj|d:\\hocc#\\chess_project\\chessboardmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6DACDAF7-7B70-4424-9D0C-C4D97AE7ED0D}|Chess_Project.csproj|solutionrelative:chessboardmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6DACDAF7-7B70-4424-9D0C-C4D97AE7ED0D}|Chess_Project.csproj|D:\\HocC#\\Chess_Project\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -26,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,46 +46,72 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "King.cs",
-              "DocumentMoniker": "D:\\HocC#\\Chess_Project\\Model\\King.cs",
-              "RelativeDocumentMoniker": "Model\\King.cs",
-              "ToolTip": "D:\\HocC#\\Chess_Project\\Model\\King.cs",
-              "RelativeToolTip": "Model\\King.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAA6wC4AAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "ChessAi.cs",
+              "DocumentMoniker": "D:\\HocC#\\Chess_Project\\AI\\ChessAi.cs",
+              "RelativeDocumentMoniker": "AI\\ChessAi.cs",
+              "ToolTip": "D:\\HocC#\\Chess_Project\\AI\\ChessAi.cs",
+              "RelativeToolTip": "AI\\ChessAi.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-14T07:10:13.2Z",
+              "WhenOpened": "2026-06-14T11:07:02.95Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "BoardEvaluator.cs",
+              "DocumentMoniker": "D:\\HocC#\\Chess_Project\\AI\\BoardEvaluator.cs",
+              "RelativeDocumentMoniker": "AI\\BoardEvaluator.cs",
+              "ToolTip": "D:\\HocC#\\Chess_Project\\AI\\BoardEvaluator.cs",
+              "RelativeToolTip": "AI\\BoardEvaluator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-14T11:07:02.093Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PieceImages.cs",
+              "DocumentMoniker": "D:\\HocC#\\Chess_Project\\Model\\PieceImages.cs",
+              "RelativeDocumentMoniker": "Model\\PieceImages.cs",
+              "ToolTip": "D:\\HocC#\\Chess_Project\\Model\\PieceImages.cs*",
+              "RelativeToolTip": "Model\\PieceImages.cs*",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAUwA0AAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-14T10:51:09.72Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Board.cs",
               "DocumentMoniker": "D:\\HocC#\\Chess_Project\\Board.cs",
               "RelativeDocumentMoniker": "Board.cs",
               "ToolTip": "D:\\HocC#\\Chess_Project\\Board.cs",
               "RelativeToolTip": "Board.cs",
-              "ViewState": "AgIAALoAAAAAAAAAAAAiwL4AAAAbAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADwAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-14T07:07:17.405Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "ChessBoardManager.cs",
               "DocumentMoniker": "D:\\HocC#\\Chess_Project\\ChessBoardManager.cs",
               "RelativeDocumentMoniker": "ChessBoardManager.cs",
-              "ToolTip": "D:\\HocC#\\Chess_Project\\ChessBoardManager.cs*",
-              "RelativeToolTip": "ChessBoardManager.cs*",
-              "ViewState": "AgIAAA8BAAAAAAAAAADwvx4BAAAPAAAAAAAAAA==",
+              "ToolTip": "D:\\HocC#\\Chess_Project\\ChessBoardManager.cs",
+              "RelativeToolTip": "ChessBoardManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-14T04:54:45.475Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "Form1.cs",
               "DocumentMoniker": "D:\\HocC#\\Chess_Project\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
